@@ -12,8 +12,9 @@ import { useDispatch } from "react-redux";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useHistory } from "react-router-dom";
 import useStyles from "./styles.js";
-import Input from "./Input";
-import Icon from "./Icon";
+import Input from "./Input.js";
+import Icon from "./Icon.js";
+import { signin, signup } from "../../actions/auth.js";
 
 const initialState = {
   firstName: "",
@@ -33,7 +34,12 @@ const Auth = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+
+    if (isSignup) {
+      dispatch(signup(formData, history));
+    } else {
+      dispatch(signin(formData, history));
+    }
   };
 
   const handleChange = (e) => {
@@ -42,7 +48,7 @@ const Auth = () => {
 
   const switchMode = () => {
     setIsSignup(!isSignup);
-    handleShowPassword(false);
+    setShowPassword(false);
   };
 
   const handleShowPassword = () => {
