@@ -13,7 +13,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import ChipInput from "material-ui-chip-input";
 import Posts from "../Posts/Posts";
 import Form from "../Form/Form";
-import { getPosts, getPostsBySearch } from "../../actions/posts";
+import { getPostsBySearch } from "../../actions/posts";
 import Paginate from "../Pagination/Pagination";
 import useStyles from "./styles.js";
 
@@ -30,11 +30,8 @@ const Home = () => {
   const query = useQuery();
   const history = useHistory();
   const page = query.get("page") || 1;
+  console.log("$$" + page + "$$");
   const searchQuery = query.get("searchQuery");
-
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentId, dispatch]);
 
   const searchPost = () => {
     if (search.trim() || tags) {
@@ -109,7 +106,7 @@ const Home = () => {
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             <Paper className={classes.pagination} elevation={6}>
-              <Paginate />
+              <Paginate page={page} />
             </Paper>
           </Grid>
         </Grid>
