@@ -1,4 +1,4 @@
-import { React, useState, useRef } from "react";
+import { React, useState, useRef, useEffect } from "react";
 import { Typography, TextField, Button } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import useStyles from "./styles.js";
@@ -18,6 +18,7 @@ const CommentSection = ({ post }) => {
 
     setComments(newComments);
     setComment("");
+    console.log(comments);
 
     commentsRef.current.scrollIntoView({ behavior: "smooth" });
   };
@@ -31,8 +32,9 @@ const CommentSection = ({ post }) => {
           </Typography>
           {comments.map((c, i) => (
             <Typography key={i} gutterBottom variant="subtitle1">
-              <strong>{c.split(":")[0]}</strong>
-              {c.split(":")[1]}
+              {/* <strong>{c.split(": ")[0]}</strong>
+              {c.split(":")[1]} */}
+              {c}
             </Typography>
           ))}
           <div ref={commentsRef} />
